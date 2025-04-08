@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro</title>
+  <style>
+    .container {
+      width: 80%;
+      margin: auto;
+      padding: 30px;
+    }
+
+    .input {
+      display: block;
+      margin: 15px;
+      padding: 10px;
+      width: 100%;
+    }
+
+    #mensagemErro {
+      color: red;
+      display: none;
+    }
+
+    @media screen and (max-width: 600px) {
+      .container {
+        width: 100px; /* ❌ erro proposital */
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Formulário de Cadastro</h2>
+  </header>
+
+  <div class="container">
+    <form id="formCadastro">
+      <label>Nome</label>
+      <input type="text" id="nome" class="input">
+
+      <label>Email</label>
+      <input type="email" id="email" class="input">
+
+      <label>Senha</label>
+      <input type="password" id="senha" class="input">
+
+      <button id="btnEnviar">Cadastrar</button>
+      <p id="mensagemErro">Preencha todos os campos corretamente.</p>
+    </form>
+
+    <section>
+      <h3>Usuários Cadastrados:</h3>
+      <ul id="listaUsuarios">
+        <!-- nomes aparecerão aqui -->
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    const btn = document.getElementById("btnEnviar");
+    const form = document.getElementById("formCadastro");
+    const nome = document.getElementById("nome");
+    const email = document.getElementById("email");
+    const senha = document.getElementById("senha");
+    const lista = document.getElementById("listaUsuarios");
+    const msg = document.getElementById("mensagemErro");
+
+    btn.addEventListener("click", function() {
+      if (nome.value != "" && email.value !== "" && senha.value.length >= 8) {
+        let li = document.createElement("li");
+        li.innerText = nome.value + " - " + email.value;
+        lista.appendChild(li);
+        nome.value = "";
+        email.value = "";
+        senha.value = "";
+      } else {
+        msg.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
